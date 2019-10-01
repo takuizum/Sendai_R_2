@@ -63,6 +63,6 @@ system.time(
 # `future_map` is about 10 times faster than `map` !
 # Additionaly you can use `.progress` option, which show progress bar.
 
-write_csv(tohoku_uni, 'tohoku_uni_tbl.csv')
+write_csv(tohoku_uni_future, 'tohoku_uni_tbl.csv') # It too big to uproad remote repo.
 
 
