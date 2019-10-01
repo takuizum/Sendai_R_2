@@ -10,6 +10,7 @@ tar_url <- prof_html[15:(length(prof_html) - 1)] %>%  #15から教員名のurl, 
   as.list()
 home_url <- "https://www.kibutu.com/"
 
+# Run mini batch
 system.time(
   tar_url[1:100] %>% # Extract sub part of full data to test code.
     map(~paste0(home_url, .x) %>% read_html %>% 
