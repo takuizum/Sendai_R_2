@@ -43,7 +43,8 @@ tohoku_uni_r1 %>%
   summarize(count = n()) %>% 
   ggplot(aes(x = Date, y = count))+
   geom_line()
-# cumlative bar plot
+
+# bar plot, x axis is year
 tohoku_uni_r1 %>% 
   mutate(year = year(Date), month = month(Date) %>% factor(levels = c(4:12, 1:3))) %>% 
   group_by(year, month = fct_explicit_na(month)) %>% 
@@ -51,7 +52,20 @@ tohoku_uni_r1 %>%
   ggplot(aes(x = year, y = count, group = month, fill = month))+
   geom_bar(stat = 'identity')
 
+# bar plot, x axis is month
+tohoku_uni_r1 %>% 
+  mutate(year = year(Date), month = month(Date) %>% factor(levels = c(4:12, 1:3))) %>% 
+  group_by(year, month = fct_explicit_na(month)) %>% 
+  summarize(count = n()) %>% 
+  ggplot(aes(x = month, y = count))+
+  geom_bar(stat = 'identity')
+
   
 # Slice records which is relevant to pedagogy
 tohoku_uni_r1 %>% filter(Class %>% str_detect('教育')) %>% .$Teacher %>% unique
+# 一度授業名を特定の単語でマッチングさせて，`str_replace`などを利用して，わかりやすいカテゴリに併合するのはどうか。
+# Question: Duplicated factor lavel.
+tohoku_uni_r1 %>% filter(Class %>% str_detect('英語'))
+tohoku_uni_r1 %>% filter(Class %>% str_detect('ドイツ'))
+
 
